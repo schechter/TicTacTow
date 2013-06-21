@@ -25,8 +25,7 @@ function computer_plays (){
     game_state[1][1] = -1;
     $('#11').text('O');
     $('#11').addClass('oed').removeClass('blank');
-    turn+=1;
-    timer = 3;
+    computer_end_turn();
     return;
   }
   else {
@@ -34,61 +33,55 @@ function computer_plays (){
       game_state[0][2] = -1;
       $('#02').text('O');
       $('#02').addClass('oed').removeClass('blank');
-      turn+=1;
-      timer = 3;
+      computer_end_turn();
       return;
     }
   }
-  // here's wher it get's interesting.  we know the center spot is taken.  If we evaluate each row and column,  if the total of any column or row is 2 we go in the spot that is still a 0 in that row or column
+// here's wher it get's interesting.  we know the center spot is taken.  If we evaluate each row and column,  if the total of any column or row is 2 we go in the spot that is still a 0 in that row or column
   if (check_zeroith_col()){
     if (game_state[0][0] === 0){
       game_state[0][0] = -1;
       $('#00').text('O');
       $('#00').addClass('oed').removeClass('blank');
-      turn+=1;
-      timer = 3;
+      computer_end_turn();
       return;
     }
     if (game_state[1][0] === 0){
       game_state[1][0] = -1;
       $('#10').text('O');
       $('#10').addClass('oed').removeClass('blank');
-      turn+=1;
-      timer = 3;
+      computer_end_turn();
       return;
     }
     if (game_state[2][0] === 0){
       game_state[2][0] = -1;
       $('#20').text('O');
       $('#20').addClass('oed').removeClass('blank');
-      turn+=1;
-      timer = 3;
+      computer_end_turn();
       return;
     }
   }
+
   if (check_first_col()){
     if (game_state[0][1] === 0){
       game_state[0][1] = -1;
       $('#01').text('O');
       $('#01').addClass('oed').removeClass('blank');
-      turn+=1;
-      timer = 3;
+      computer_end_turn();
       return;
     }
     if (game_state[1][1] === 0){
       game_state[1][1] = -1;
       $('#11').text('O');
       $('#11').addClass('oed').removeClass('blank');
-      turn+=1;
-      timer = 3;
+      computer_end_turn();
       return;
     }
     if (game_state[2][1] === 0){
       game_state[2][1] = -1;
       $('#21').text('O');
       $('#21').addClass('oed').removeClass('blank');
-      turn+=1;
-      timer = 3;
+      computer_end_turn();
       return;
     }
   }
@@ -98,50 +91,45 @@ function computer_plays (){
       game_state[0][2] = -1;
       $('#02').text('O');
       $('#02').addClass('oed').removeClass('blank');
-      turn+=1;
-      timer = 3;
+      computer_end_turn();
       return;
     }
     if (game_state[1][2] === 0){
       game_state[1][2] = -1;
       $('#12').text('O');
       $('#12').addClass('oed').removeClass('blank');
-      turn+=1;
-      timer = 3;
+      computer_end_turn();
       return;
     }
     if (game_state[2][2] === 0){
       game_state[2][2] = -1;
       $('#22').text('O');
       $('#22').addClass('oed').removeClass('blank');
-      turn+=1;
-      timer = 3;
+      computer_end_turn();
       return;
     }
   }
+
   if (check_zeroith_row()){
       if (game_state[0][0] === 0){
       game_state[0][0] = -1;
       $('#00').text('O');
       $('#00').addClass('oed').removeClass('blank');
-      turn+=1;
-      timer = 3;
+      computer_end_turn();
       return;
     }
     if (game_state[0][1] === 0){
       game_state[0][1] = -1;
       $('#01').text('O');
       $('#01').addClass('oed').removeClass('blank');
-      turn+=1;
-      timer = 3;
+      computer_end_turn();
       return;
     }
     if (game_state[0][2] === 0){
       game_state[0][2] = -1;
       $('#02').text('O');
       $('#02').addClass('oed').removeClass('blank');
-      turn+=1;
-      timer = 3;
+      computer_end_turn();
       return;
     }
   }
@@ -151,24 +139,21 @@ function computer_plays (){
       game_state[1][0] = -1;
       $('#10').text('O');
       $('#10').addClass('oed').removeClass('blank');
-      turn+=1;
-      timer = 3;
+      computer_end_turn();
       return;
     }
     if (game_state[0][1] === 0){
       game_state[1][1] = -1;
       $('#11').text('O');
       $('#11').addClass('oed').removeClass('blank');
-      turn+=1;
-      timer = 3;
+      computer_end_turn();
       return;
     }
     if (game_state[1][2] === 0){
       game_state[1][2] = -1;
       $('#12').text('O');
       $('#12').addClass('oed').removeClass('blank');
-      turn+=1;
-      timer = 3;
+      computer_end_turn();
       return;
     }
   }
@@ -178,16 +163,14 @@ function computer_plays (){
       game_state[2][0] = -1;
       $('#20').text('O');
       $('#20').addClass('oed').removeClass('blank');
-      turn+=1;
-      timer = 3;
+      computer_end_turn();
       return;
     }
     if (game_state[2][1] === 0){
       game_state[2][1] = -1;
       $('#21').text('O');
       $('#21').addClass('oed').removeClass('blank');
-      turn+=1;
-      timer = 3;
+      computer_end_turn();
       return;
     }
     if (game_state[2][2] === 0){
@@ -199,6 +182,9 @@ function computer_plays (){
       return;
     }
   }
+  // check_everything();
+
+
   var cell = 1;
   while(cell !== 0){
     var r =Math.floor(Math.random(0)*3);
@@ -213,7 +199,14 @@ function computer_plays (){
     check_everything();
     timer = 3
     return;
-    }
+  }
+}
+
+function computer_end_turn(){
+  turn +=1;
+  check_everything();
+  timer = 3
+  return;
 }
 
 function check_zeroith_col(){
@@ -427,5 +420,4 @@ $(document).ready(function() {
   $('#tictactoe_board').on('click', '.blank.cell', mark_cell);
   $('#reset').on('click', reset_game);
   timer = setInterval(clock_tick, 1000);
-
 });
